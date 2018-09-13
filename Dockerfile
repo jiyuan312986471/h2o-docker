@@ -8,11 +8,6 @@ FROM ubuntu:16.04
 # maintainer details
 MAINTAINER h2oai "h2o.ai"
 
-# add a post-invoke hook to dpkg which deletes cached deb files
-# update the sources.list
-# update/dist-upgrade
-# clear the caches
-
 
 RUN \
   echo 'DPkg::Post-Invoke {"/bin/rm -f /var/cache/apt/archives/*.deb || true";};' | tee /etc/apt/apt.conf.d/no-cache && \
@@ -51,20 +46,7 @@ RUN \
   wget https://raw.githubusercontent.com/laurendiperna/Churn_Scripts/master/Transformation_Script.py && \
   wget https://raw.githubusercontent.com/laurendiperna/Churn_Scripts/master/Modeling_Script.py
 
-
-# Define a mountable data directory
-#VOLUME \
-#  ["/data"]
-
-# Define the working directory
-#WORKDIR \
-#  /data
-
 EXPOSE 54321
 EXPOSE 54322
 
-ENTRYPOINT ["java", "-Xmx4g", "-jar", "/opt/h2o.jar"]
-# Define default command
-
-#CMD \
-#  ["/bin/bash"]
+ENTRYPOINT ["java", "-Xmx16g", "-jar", "/opt/h2o.jar"]
