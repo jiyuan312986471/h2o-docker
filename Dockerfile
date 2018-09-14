@@ -1,13 +1,4 @@
-########################################################################
-# Dockerfile for Oracle JDK 8 on Ubuntu 16.04
-########################################################################
-
-# pull base image
 FROM ubuntu:16.04
-
-# maintainer details
-MAINTAINER h2oai "h2o.ai"
-
 
 RUN \
   echo 'DPkg::Post-Invoke {"/bin/rm -f /var/cache/apt/archives/*.deb || true";};' | tee /etc/apt/apt.conf.d/no-cache && \
@@ -32,7 +23,7 @@ RUN \
   unzip -d /opt /opt/h2o.zip && \
   rm /opt/h2o.zip && \
   cd /opt && \
-  cd `find . -name 'h2o.jar' | sed 's/.\///;s/\/h2o.jar//g'` && \ 
+  cd `find . -name 'h2o.jar' | sed 's/.\///;s/\/h2o.jar//g'` && \
   cp h2o.jar /opt && \
   /usr/bin/pip install `find . -name "*.whl"` && \
   cd / && \
@@ -41,7 +32,7 @@ RUN \
 
 # Get Content
   wget http://s3.amazonaws.com/h2o-training/mnist/train.csv.gz && \
-  gunzip train.csv.gz && \ 
+  gunzip train.csv.gz && \
   wget https://raw.githubusercontent.com/laurendiperna/Churn_Scripts/master/Extraction_Script.py  && \
   wget https://raw.githubusercontent.com/laurendiperna/Churn_Scripts/master/Transformation_Script.py && \
   wget https://raw.githubusercontent.com/laurendiperna/Churn_Scripts/master/Modeling_Script.py
