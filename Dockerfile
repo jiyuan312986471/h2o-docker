@@ -40,4 +40,4 @@ RUN \
 EXPOSE 54321
 EXPOSE 54322
 
-ENTRYPOINT ["java", "-Xmx48g", "-jar", "/opt/h2o.jar"]
+ENTRYPOINT ["java", "-Xmx32g", "-jar", "/opt/h2o.jar"]
